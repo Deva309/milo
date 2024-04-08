@@ -1073,6 +1073,11 @@ async function processSection(section, config, isDoc) {
   return section.blocks;
 }
 
+const loadWAM = async (getConfig, loadIms, loadScript) => {
+  const { default: initWAM } = await import('../features/wam.js');
+  await initWAM(getConfig, loadIms, loadScript);
+}
+
 export async function loadArea(area = document) {
   const isDoc = area === document;
 
@@ -1089,6 +1094,10 @@ export async function loadArea(area = document) {
   }
 
   const sections = decorateSections(area, isDoc);
+  /** TODO: Remove These Lines */
+  sessionStorage.setItem('pageLoadStarted', (new Date()).getTime());
+  /** TODO: Remove These Lines */
+  await loadWAM(getConfig, loadIms, loadScript);
 
   const areaBlocks = [];
   for (const section of sections) {

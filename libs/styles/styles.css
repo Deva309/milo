@@ -332,6 +332,10 @@
   text-decoration: none;
 }
 
+.con-button.disabled {
+  background-color: grey;
+}
+
 .l-button .con-button,
 .con-button.button-l {
   border-radius: 20px;
