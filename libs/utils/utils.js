@@ -1047,8 +1047,9 @@ async function documentPostSectionLoading(config) {
   if (config.experiment?.selectedVariant?.scripts?.length) {
     config.experiment.selectedVariant.scripts.forEach((script) => loadScript(script));
   }
+  
   initSidekick();
-
+  
   const { default: delayed } = await import('../scripts/delayed.js');
   delayed([getConfig, getMetadata, loadScript, loadStyle, loadIms]);
 
@@ -1121,6 +1122,9 @@ export async function loadArea(area = document) {
       if (!block.className.includes('metadata')) block.dataset.block = '';
     });
   }
+
+  const { default: initWAM } = await import('../features/wam.js');
+  await initWAM(getConfig, loadIms, loadScript);
 
   const currentHash = window.location.hash;
   if (currentHash) {
