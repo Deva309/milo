@@ -47,7 +47,7 @@ function highlightTextElements(terms, elements) {
     if (textAfter) {
       fragment.appendChild(document.createTextNode(textAfter));
     }
-    element.innerHTML = '';
+    element.textContent = '';
     element.appendChild(fragment);
   });
 }
@@ -87,7 +87,7 @@ async function getResults(signal, terms, config, resultsEl, dataSegment, prevHit
 export default async function onSearchInput(
   { value, resultsEl, searchInputEl, advancedSearchEl, contextualConfig: config },
 ) {
-  resultsEl.innerHTML = '';
+  resultsEl.textContent = '';
   if (!value.length) {
     searchInputEl.classList.remove('gnav-search-input--isPopulated');
     return;

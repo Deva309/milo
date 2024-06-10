@@ -332,7 +332,8 @@ export async function fetchAndProcessPlainHtml({ url, shouldDecorateLinks = true
   }
   const res = await fetch(path.replace(/(\.html$|$)/, '.plain.html'));
   const text = await res.text();
-  const { body } = new DOMParser().parseFromString(text, 'text/html');
+  const textWithPlaceholder = await replaceText(text, getFedsPlaceholderConfig());
+  const { body } = new DOMParser().parseFromString(textWithPlaceholder, 'text/html');
   if (mepFragment?.manifestId) body.dataset.manifestId = mepFragment.manifestId;
   const commands = mepGnav?.commands;
   if (commands?.length) {
@@ -362,7 +363,6 @@ export async function fetchAndProcessPlainHtml({ url, shouldDecorateLinks = true
       .then(({ default: decorate }) => blocks.forEach((block) => decorate(block)));
   }
 
-  body.innerHTML = await replaceText(body.innerHTML, getFedsPlaceholderConfig());
   return body;
 }
 
