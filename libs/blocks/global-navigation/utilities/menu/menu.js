@@ -316,10 +316,7 @@ const decorateMenu = (config) => logErrorFor(async () => {
       }));
     if (!content) return;
 
-    const menuContent = toFragment`<div class="feds-menu-content"></div>`;
-    while (content.firstChild) {
-      menuContent.appendChild(content.firstChild);
-    }
+    const menuContent = toFragment`<div class="feds-menu-content">${content.innerHTML}</div>`;
     menuTemplate = toFragment`<div class="feds-popup">
         <div class="feds-menu-container">
           ${menuContent}
