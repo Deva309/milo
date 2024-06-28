@@ -256,6 +256,7 @@ export function setCurtainState(state) {
 }
 
 export const isDesktop = window.matchMedia('(min-width: 900px)');
+export const isTabletAndAbove = window.matchMedia('(min-width: 600px)');
 export const isTangentToViewport = window.matchMedia('(min-width: 900px) and (max-width: 1440px)');
 
 export function setActiveDropdown(elem) {

@@ -17,6 +17,7 @@ import {
   hasActiveLink,
   icons,
   isDesktop,
+  isTabletAndAbove,
   isTangentToViewport,
   lanaLog,
   loadBaseStyles,
@@ -770,10 +771,25 @@ class Gnav {
     return decoratedElem;
   };
 
+
+
   decorateAside = async () => {
     this.elements.aside = '';
     const promoPath = getMetadata('gnav-promo-source');
-    if (!isDesktop.matches || !promoPath) {
+    // const promoEnable = getMetadata('gnav-promo-enable');
+    // const checkView = () => {
+    //   switch(promoEnable) {
+    //     case 'desktop': 
+    //       return isDesktop.matches;
+    //     case 'tablet':
+    //       return isTabletAndAbove.matches;
+    //     default:
+    //       return true;
+    //   }
+    // }
+    // console.log('checkView', checkView());
+    // if (!checkView() || !promoPath) {
+    if (!promoPath) {
       this.block.classList.remove('has-promo');
       return this.elements.aside;
     }
