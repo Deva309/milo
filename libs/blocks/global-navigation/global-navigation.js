@@ -789,6 +789,7 @@ class Gnav {
     // }
     // console.log('checkView', checkView());
     // if (!checkView() || !promoPath) {
+      
     if (!promoPath) {
       this.block.classList.remove('has-promo');
       return this.elements.aside;
