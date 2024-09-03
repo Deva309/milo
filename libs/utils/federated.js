@@ -1,7 +1,7 @@
 import { getConfig } from './utils.js';
 
 let federatedContentRoot;
-/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/prefer-default-export */ 
 export const getFederatedContentRoot = () => {
   const cdnWhitelistedOrigins = [
     'https://www.adobe.com',
