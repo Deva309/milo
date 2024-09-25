@@ -81,10 +81,6 @@ header.global-navigation {
   overflow-y: auto;
 }
 
-.feds-nav .feds-navItem:last-child {
-  margin-bottom: 63px;
-}
-
 /* Promo */
 .global-navigation .aside.promobar {
   z-index: 1;
