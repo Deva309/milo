@@ -56,12 +56,12 @@ header.global-navigation {
 
 .feds-nav-wrapper {
   position: absolute;
-  top: 100%;
+  top: 102%;
   left: 0;
   right: 20px; /* hamburger menu gutter */
   display: none;
   flex-direction: column;
-  height: calc(100vh - 100% - 110px);
+  height: calc(100vh - 98% - 110px);
   border-top: 1px solid var(--feds-borderColor);
   background-color: var(--feds-background-nav);
 }
