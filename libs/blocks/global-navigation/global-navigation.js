@@ -696,7 +696,7 @@ class Gnav {
         this.elements.mainNav.style.removeProperty('padding-bottom');
       } else {
         const offset = Math.ceil(this.elements.topnavWrapper.getBoundingClientRect().bottom);
-        this.elements.mainNav.style.setProperty('padding-bottom', `0`);
+        this.elements.mainNav.style.setProperty('padding-bottom', `${offset}px`);
       }
     };
 
@@ -709,7 +709,7 @@ class Gnav {
         await this.loadSearch();
       }
 
-      if (this.isToggleExpanded()) setHamburgerPadding();
+      // if (this.isToggleExpanded()) setHamburgerPadding();
     };
 
     toggle.addEventListener('click', () => logErrorFor(onToggleClick, 'Toggle click failed', 'errorType=error,module=gnav'));
