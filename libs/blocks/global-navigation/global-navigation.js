@@ -709,7 +709,7 @@ class Gnav {
         await this.loadSearch();
       }
 
-      if (this.isToggleExpanded()) setHamburgerPadding();
+      // if (this.isToggleExpanded()) setHamburgerPadding();
     };
 
     toggle.addEventListener('click', () => logErrorFor(onToggleClick, 'Toggle click failed', 'errorType=error,module=gnav'));
