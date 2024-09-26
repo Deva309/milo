@@ -672,7 +672,7 @@ class Gnav {
     const toggle = this.elements.mobileToggle;
     const isExpanded = this.isToggleExpanded();
     toggle?.setAttribute('aria-expanded', !isExpanded);
-    !isExpanded ? document.body.style.setProperty('overflow', 'hidden'): document.body.style.removeProperty('overflow');
+    !isExpanded ? document.body.classList.add('disable-scroll') : document.body.classList.remove('disable-scroll');
     this.elements.navWrapper?.classList?.toggle('feds-nav-wrapper--expanded', !isExpanded);
     closeAllDropdowns();
     setCurtainState(!isExpanded);
@@ -719,7 +719,7 @@ class Gnav {
       if (isDesktop.matches) {
         toggle.setAttribute('aria-expanded', false);
         this.elements.navWrapper.classList.remove('feds-nav-wrapper--expanded');
-        document.body.style.removeProperty('overflow');
+        document.body.classList.remove('disable-scroll');
         setCurtainState(false);
         closeAllDropdowns();
         this.blocks?.search?.instance?.clearSearchForm();
