@@ -693,8 +693,10 @@ class Gnav {
 
     const setHamburgerPadding = () => {
       if (isDesktop.matches) {
+        document.body.style.removeProperty('overflow');
         this.elements.mainNav.style.removeProperty('padding-bottom');
       } else {
+        document.body.style.setProperty('overflow', 'hidden');
         const offset = Math.ceil(this.elements.topnavWrapper.getBoundingClientRect().bottom);
         this.elements.mainNav.style.setProperty('padding-bottom', `${2 * offset}px`);
       }
