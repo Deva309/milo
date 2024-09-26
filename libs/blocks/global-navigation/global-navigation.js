@@ -672,6 +672,7 @@ class Gnav {
     const toggle = this.elements.mobileToggle;
     const isExpanded = this.isToggleExpanded();
     toggle?.setAttribute('aria-expanded', !isExpanded);
+    !isExpanded ? document.body.style.setProperty('overflow', 'hidden'): document.body.style.removeProperty('overflow');
     this.elements.navWrapper?.classList?.toggle('feds-nav-wrapper--expanded', !isExpanded);
     closeAllDropdowns();
     setCurtainState(!isExpanded);
@@ -693,10 +694,8 @@ class Gnav {
 
     const setHamburgerPadding = () => {
       if (isDesktop.matches) {
-        document.body.style.removeProperty('overflow');
         this.elements.mainNav.style.removeProperty('padding-bottom');
       } else {
-        document.body.style.setProperty('overflow', 'hidden');
         const offset = Math.ceil(this.elements.topnavWrapper.getBoundingClientRect().bottom);
         this.elements.mainNav.style.setProperty('padding-bottom', `${2 * offset}px`);
       }
@@ -720,6 +719,7 @@ class Gnav {
       if (isDesktop.matches) {
         toggle.setAttribute('aria-expanded', false);
         this.elements.navWrapper.classList.remove('feds-nav-wrapper--expanded');
+        document.body.style.removeProperty('overflow');
         setCurtainState(false);
         closeAllDropdowns();
         this.blocks?.search?.instance?.clearSearchForm();
