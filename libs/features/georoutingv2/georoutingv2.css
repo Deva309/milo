@@ -152,8 +152,7 @@
   }
 }
 
-@media only screen and (max-device-width: 812px) and (orientation: landscape) {
-  /* Styles for all iPhone devices in landscape */
+@media only screen and (max-device-width: 956px) and (orientation: landscape) {
   .dialog-modal.locale-modal-v2 {
       overflow: auto;
   }
