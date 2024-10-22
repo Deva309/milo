@@ -19,6 +19,7 @@ const envMap = {
   prod: 'https://www.adobe.com',
   stage: 'https://www.stage.adobe.com',
   qa: 'https://gnav--milo--adobecom.hlx.page',
+  local: 'http://localhost:6456',
 };
 
 const stageDomainsMap = {

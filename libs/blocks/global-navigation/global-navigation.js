@@ -228,9 +228,9 @@ const setupKeyboardNav = async () => {
   });
 };
 
-const getBrandImage = (image) => {
+const getBrandImage = (image, brandImageOnly) => {
   // Return the default Adobe logo if an image is not available
-  if (!image) return CONFIG.icons.company;
+  if (!image) return brandImageOnly ? CONFIG.icons.brand: CONFIG.icons.company;
 
   // Try to decorate image as PNG, JPG or JPEG
   const imgText = image?.textContent || '';
@@ -760,8 +760,9 @@ class Gnav {
     if (!link) return '';
 
     // Check which elements should be rendered
+    const brandImage = rawBlock.matches('.brand-image');
     const renderImage = !rawBlock.matches('.no-logo');
-    const renderLabel = includeLabel && !rawBlock.matches('.image-only');
+    const renderLabel = !brandImage && includeLabel && !rawBlock.matches('.image-only');
 
     if (!renderImage && !renderLabel) return '';
 
@@ -773,18 +774,19 @@ class Gnav {
 
         const images = blockLinks.filter((blockLink) => imgRegex.test(blockLink.href)
         || imgRegex.test(blockLink.textContent));
-        if (images.length === 2) return getBrandImage(images[1]);
+        if (images.length === 2) return getBrandImage(images[1], brandImage);
       }
       const svgImg = rawBlock.querySelector('picture img[src$=".svg"]');
       if (svgImg) return svgImg;
 
       const image = blockLinks.find((blockLink) => imgRegex.test(blockLink.href)
         || imgRegex.test(blockLink.textContent));
-      return getBrandImage(image);
+      return getBrandImage(image, brandImage);
     };
 
+    const brandImageClass = brandImage ? ' brand-image-only': '';
     const imageEl = renderImage
-      ? toFragment`<span class="${classPrefix}-image">${getImageEl()}</span>`
+      ? toFragment`<span class="${classPrefix}-image${brandImageClass}">${getImageEl()}</span>`
       : '';
 
     // Create label element
