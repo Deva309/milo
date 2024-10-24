@@ -928,6 +928,7 @@ header.global-navigation {
   .mobile-redesign .feds-menu-container .feds-navLink {
     font-size: 14px;
     color: #2f2f2f;
+    white-space: normal;
   }
 
   .mobile-redesign .feds-menu-container .feds-navLink .feds-navLink-title {
