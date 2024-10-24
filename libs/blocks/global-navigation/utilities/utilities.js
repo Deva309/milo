@@ -228,15 +228,25 @@ export function setCurtainState(state) {
 export const isDesktop = window.matchMedia('(min-width: 900px)');
 export const isTangentToViewport = window.matchMedia('(min-width: 900px) and (max-width: 1440px)');
 
+export const isNewMobileNav = () => {
+  return document.querySelector('header').classList.contains('mobile-redesign');
+}
+
+export const resetActiveDropdown = (activeClass) => {
+  const hasNewMobileNav = isNewMobileNav();
+  [...document.querySelectorAll(selectors.activeDropdown)]
+    .forEach((activeDropdown) => activeDropdown.classList.remove(activeClass));
+  if (hasNewMobileNav) {
+    document.querySelector('.feds-nav-wrapper').classList.remove('dropdownOpen');
+  }
+};
+
 export function setActiveDropdown(elem) {
   const activeClass = selectors.activeDropdown.replace('.', '');
+  const hasNewMobileNav = isNewMobileNav();
 
   // We always need to reset all active dropdowns at first
-  const resetActiveDropdown = () => {
-    [...document.querySelectorAll(selectors.activeDropdown)]
-      .forEach((activeDropdown) => activeDropdown.classList.remove(activeClass));
-  };
-  resetActiveDropdown();
+  resetActiveDropdown(activeClass);
 
   // If no elem is provided, de-activating all dropdowns is enough
   if (!(elem instanceof HTMLElement)) return;
@@ -250,6 +260,14 @@ export function setActiveDropdown(elem) {
 
     if (closestSection && closestSection.querySelector('[aria-expanded = "true"]')) {
       closestSection.classList.add(activeClass);
+      if (hasNewMobileNav) {
+        document.querySelector('.feds-nav-wrapper').classList.add('dropdownOpen');
+        elem.parentElement.querySelector('.feds-menu-column .feds-menu-headline').setAttribute('aria-expanded', true);
+        const primaryCta = elem.parentElement.querySelector('.feds-cta--primary');
+        if (primaryCta) {
+          primaryCta.parentElement.classList.add('feds-sticky-cta');
+        }
+      }
       return true;
     }
 

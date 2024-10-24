@@ -12,6 +12,8 @@ import {
   trigger,
   yieldToMain,
   addMepHighlightAndTargetId,
+  isNewMobileNav,
+  resetActiveDropdown,
 } from '../utilities.js';
 
 const decorateHeadline = (elem, index) => {
@@ -310,10 +312,36 @@ const decorateMenu = (config) => logErrorFor(async () => {
     const content = await fetchAndProcessPlainHtml({ url: pathElement.href });
 
     if (!content) return;
+    
+    let menuHeader = '';
+
+    if (isNewMobileNav()) {
+      const activeClass = selectors.activeDropdown.replace('.', '');
+      const headline = pathElement.innerText;
+      const backArrow = toFragment`<span class="back-arrow"></span>`;
+      const closeIcon = toFragment`<span class="close-icon"></span>`;
+      menuHeader = toFragment`<div>
+        <div class="feds-menu-header">
+          <div>
+            ${backArrow}
+            <span class="title">main menu</span>
+          </div>
+          ${closeIcon}
+        </div>
+        <div class="feds-menu-header-text">${headline}</div>
+      </div>`;
+      [backArrow, closeIcon].forEach((element) => {
+        element.addEventListener('click', (e) => {
+          resetActiveDropdown(activeClass);
+          e.target.closest('.feds-navItem').querySelector('.feds-navLink').setAttribute('aria-expanded', false);
+        });
+      })
+    }
 
     const menuContent = toFragment`<div class="feds-menu-content">${content.innerHTML}</div>`;
     menuTemplate = toFragment`<div class="feds-popup">
         <div class="feds-menu-container">
+          ${menuHeader}
           ${menuContent}
         </div>
       </div>`;

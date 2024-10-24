@@ -710,10 +710,10 @@ class Gnav {
 
     const setHamburgerPadding = () => {
       if (isDesktop.matches) {
-        this.elements.mainNav.style.removeProperty('padding-bottom');
+        // this.elements.mainNav.style.removeProperty('padding-bottom');
       } else {
         const offset = Math.ceil(this.elements.topnavWrapper.getBoundingClientRect().bottom);
-        this.elements.mainNav.style.setProperty('padding-bottom', `${2 * offset}px`);
+        // this.elements.mainNav.style.setProperty('padding-bottom', `${2 * offset}px`);
       }
     };
 

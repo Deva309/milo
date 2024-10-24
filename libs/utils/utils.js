@@ -1069,6 +1069,8 @@ async function loadPostLCP(config) {
     header.classList.add('gnav-hide');
     await loadBlock(header);
     header.classList.remove('gnav-hide');
+    // Add through feature
+    header.classList.add('mobile-redesign');
   }
   loadTemplate();
   const { default: loadFonts } = await import('./fonts.js');
