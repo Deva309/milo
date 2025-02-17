@@ -321,11 +321,11 @@ export function closeAllDropdowns({ type } = {}) {
   if (isDesktop.matches) setCurtainState(false);
 }
 
-// function preventTouchScroll(event) {
-//   if (document.body.classList.contains('disable-ios-scroll') && event.target === document.body) {
-//     event.preventDefault();
-//   }
-// }
+function preventTouchScroll(event) {
+  if (document.body.classList.contains('disable-ios-scroll')) {
+    event.preventDefault();
+  }
+}
 
 export const disableMobileScroll = () => {
   if (!PERSONALIZATION_TAGS.safari()) return;
@@ -333,7 +333,7 @@ export const disableMobileScroll = () => {
   if (document.body.style.top) return;
   document.body.style.top = `-${window.scrollY}px`;
   document.body.classList.add('disable-ios-scroll');
-  // document.addEventListener('touchmove', preventTouchScroll, { passive: false });
+  document.addEventListener('touchmove', preventTouchScroll, { passive: false });
 };
 
 export const enableMobileScroll = () => {
@@ -342,7 +342,7 @@ export const enableMobileScroll = () => {
   const y = Math.abs(parseInt(document.body.style.top, 10));
   if (Number.isNaN(y)) return;
   document.body.classList.remove('disable-ios-scroll');
-  // document.removeEventListener('touchmove', preventTouchScroll);
+  document.removeEventListener('touchmove', preventTouchScroll);
   document.body.style.removeProperty('top');
   window.scroll(0, y || 0, { behavior: 'instant' });
 };
