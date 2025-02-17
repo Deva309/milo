@@ -1068,7 +1068,7 @@ class Gnav {
     if (isPresent && !isSticky) {
       const delta = (iOSy || y || 0) - height;
       popup.style = `
-        top: calc(0px - var(--feds-height-nav) + ${Math.max(delta, 0)}px - 2px);
+        top: calc(0px - var(--feds-height-nav) + ${Math.max(delta, 0)}px - 5px);
         height: calc(100dvh + ${Math.min(delta, 0)}px + 2px);
       `;
     } else if (isPresent && isSticky) {
