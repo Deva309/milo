@@ -322,8 +322,8 @@ export function closeAllDropdowns({ type } = {}) {
 }
 
 function preventTouchScroll(event) {
-  if (document.body.classList.contains('disable-ios-scroll')) {
-      event.preventDefault();
+  if (document.body.classList.contains('disable-ios-scroll') && event.target === document.body) {
+    event.preventDefault();
   }
 }
 
