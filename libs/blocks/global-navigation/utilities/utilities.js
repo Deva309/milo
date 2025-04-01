@@ -605,20 +605,22 @@ export const [branchBannerLoadCheck, getBranchBannerInfo] = (() => {
             mutation.addedNodes.forEach((node) => {
               // Check if the added node has the ID 'branch-banner-iframe'
               if (node.id === 'branch-banner-iframe') {
-                branchBannerInfo.isPresent = true;
-                // The element is added, now check its height and sticky status
-                // Check if the element has a sticky position
-                branchBannerInfo.isSticky = window.getComputedStyle(node).position === 'fixed';
-                branchBannerInfo.height = node.offsetHeight; // Get the height of the element
-                if (branchBannerInfo.isSticky) {
-                  // Adjust the top position of the lnav to account for the branch banner height
-                  document.querySelector('.feds-localnav').style.top = `${branchBannerInfo.height}px`;
-                } else {
-                  // Add a class to the body to indicate the presence of a non-sticky branch banner
-                  document.body.classList.add('branch-banner-inline');
-                }
-                // Update the popup position when the branch banner is added
-                updatePopupPosition();
+                setTimeout(() => {
+                  branchBannerInfo.isPresent = true;
+                  // The element is added, now check its height and sticky status
+                  // Check if the element has a sticky position
+                  branchBannerInfo.height = node.offsetHeight; // Get the height of the element
+                  branchBannerInfo.isSticky = window.getComputedStyle(node).position === 'fixed';
+                  if (branchBannerInfo.isSticky) {
+                    // Adjust the top position of the lnav to account for the branch banner height
+                    document.querySelector('.feds-localnav').style.top = `${branchBannerInfo.height}px`;
+                  } else {
+                    // Add a class to the body to indicate the presence of a non-sticky branch banner
+                    document.body.classList.add('branch-banner-inline');
+                  }
+                  // Update the popup position when the branch banner is added
+                  updatePopupPosition();
+                }, 50);
               }
             });
 
@@ -645,7 +647,7 @@ export const [branchBannerLoadCheck, getBranchBannerInfo] = (() => {
       // Start observing the body element for added child nodes
       observer.observe(document.body, {
         childList: true, // Watch for added or removed child nodes
-        subtree: false, // Only observe direct children of <body>
+        subtree: true, // Only observe direct children of <body>
       });
     },
     /**
