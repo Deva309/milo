@@ -15,7 +15,7 @@ export default async function decorateAside({ headerElem, fedsPromoWrapper, prom
   decorateAutoBlock(fragLink);
   if (!fragLink.classList.contains('fragment')) return onError();
   await loadBlock(fragLink).catch(() => onError());
-  const aside = fragTemplate.querySelector('.aside');
+  const aside = fragTemplate.querySelector('.aside, .notification');
   if (fragTemplate.contains(fragLink) || !aside) return onError();
 
   aside.removeAttribute('data-block');

@@ -90,6 +90,10 @@ header.global-navigation {
   min-height: var(--global-height-navPromo);
 }
 
+.feds-promo-aside-wrapper .notification .close {
+  display: none;
+}
+
 /* Product Entry CTA */
 .feds-product-entry-cta{
   align-items: center;
